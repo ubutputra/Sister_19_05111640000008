@@ -1,4 +1,4 @@
-#!"D:\kuliah\semester 7\sister\github\venv\Scripts\python.exe"
+#!"D:\kuliah\semester 7\sister\ubut_github\Sister_19_05111640000008\tugas 2 pyro\venv\Scripts\python.exe"
 # EASY-INSTALL-ENTRY-SCRIPT: 'setuptools==40.8.0','console_scripts','easy_install'
 __requires__ = 'setuptools==40.8.0'
 import re

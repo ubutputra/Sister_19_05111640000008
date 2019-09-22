@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=D:\kuliah\semester 7\sister\github\venv"
+set "VIRTUAL_ENV=D:\kuliah\semester 7\sister\ubut_github\Sister_19_05111640000008\tugas 2 pyro\venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

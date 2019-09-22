@@ -1,4 +1,4 @@
-#!"D:\kuliah\semester 7\sister\github\venv\Scripts\python.exe"
+#!"D:\kuliah\semester 7\sister\ubut_github\Sister_19_05111640000008\tugas 2 pyro\venv\Scripts\python.exe"
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==19.0.3','console_scripts','pip3'
 __requires__ = 'pip==19.0.3'
 import re
