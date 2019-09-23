@@ -40,7 +40,7 @@ class FileManage(object):
         arr = os.listdir()
         return arr 
     
-    def update_file(selft,filename="",content=""):
+    def update_file(self,filename="",content=""):
         path = os.getcwd()
         namafile = filename
         filename = os.path.join(path,filename)
