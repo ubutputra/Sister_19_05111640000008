@@ -58,4 +58,4 @@ if __name__=='__main__':
             else:
                 print("perintah tidak diketahui")
         except ValueError:
-            print("Sorry, my only purpose is to talk to N and A")
+            print("perintah tidak diketahui")
