@@ -1,10 +1,17 @@
 import Pyro4
+import socket
 uri = "PYRONAME:ubutserver@localhost:7777"
 
-def get_list():
+def get_list(hostname):
     gserver = Pyro4.Proxy(uri)
-    print(gserver.list_dir())
+    #check ping ack
+    check = gserver.ping_ack(hostname)
+    if check == True:
+        print(gserver.list_dir())
+    else:
+        print('gagal membuat koneksi')
 
+    
 def get_create(filename):
     gserver = Pyro4.Proxy(uri)
     print(gserver.create_file(filename))
@@ -24,6 +31,7 @@ def get_update(filename,content):
 
 
 if __name__=='__main__':
+    hostname = '127.0.0.1'
     #test_no_ns()
     print('1.list : melihat list file')
     print('2.create  : membuat file')
@@ -36,7 +44,7 @@ if __name__=='__main__':
         try:
             masukan = input("Masukan perintah :  ")
             if masukan == '1':
-                get_list()
+                get_list(hostname)
             elif masukan == '2':
                 filename = input('Nama file: ')
                 get_create(filename)
