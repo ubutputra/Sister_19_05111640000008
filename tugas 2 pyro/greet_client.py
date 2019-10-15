@@ -10,9 +10,19 @@ def get_list(hostname):
     #     print(gserver.list_dir())
     # else:
     #     print('gagal membuat koneksi')
+    #end check ping ack
     
     #check heartbeat
-    print(gserver.check_heartbeat(3,'list dir'))
+    interval = 3
+    sequence = 0
+    seq_number = gserver.check_heartbeat(interval,'list dir',sequence)
+    if(seq_number > 0):
+        print('berhasil membuat koneksi')
+    else:
+        print('gagal membuat koneksi')
+    
+    #end check heartbeat
+
    
 
     

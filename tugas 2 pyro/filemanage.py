@@ -58,8 +58,6 @@ class FileManage(object):
             return "file tidak ditemukan"
     
     
-
-    
     
     def ping_ack(self,hostname):
         T = 5
@@ -88,26 +86,27 @@ class FileManage(object):
 
         return pingstatus
     
-    def check_heartbeat(self,interval,service):
-        sequence = 1
-        limit = 10
-        # for service in self.name_service:
-        self.current_heartbeat[service] = sequence
-        self.last_heartbeat[service] = sequence
-        for iterasi in range(sequence,limit):
+    def check_heartbeat(self,interval,service,sequence):
+        while True:
+            # for service in self.name_service:
+            #self.current_heartbeat[service] = sequence
             self.last_heartbeat[service] = sequence
-            self.current_heartbeat[service] = sequence
+            #for iterasi in range(sequence,limit):
+            sequence = self.send_heartbeat(self.last_heartbeat[service])
             
-
-            time.sleep(interval)
-            print('Sequence number:',self.current_heartbeat[service])
-            respon = self.send_heartbeat(self.current_heartbeat[service])
-            sequence = sequence + 1
+            self.current_heartbeat[service] = sequence
+            if(self.last_heartbeat[service] < self.current_heartbeat[service]):
+                self.last_heartbeat = self.current_heartbeat
+                print('Sequence number:',self.current_heartbeat[service])
+                respon = sequence
             return respon
+            time.sleep(interval)
+        
            
                 
     def send_heartbeat(self,seq_number):
-        return seq_number
+        seq_number = seq_number + 1
+        return seq_number 
 
     def save_service(self,name_service):
         self.current_heartbeat[name_service] = 0
