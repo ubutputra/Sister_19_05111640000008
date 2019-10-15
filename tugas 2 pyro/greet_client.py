@@ -5,11 +5,15 @@ uri = "PYRONAME:ubutserver@localhost:7777"
 def get_list(hostname):
     gserver = Pyro4.Proxy(uri)
     #check ping ack
-    check = gserver.ping_ack(hostname)
-    if check == True:
-        print(gserver.list_dir())
-    else:
-        print('gagal membuat koneksi')
+    # check = gserver.ping_ack(hostname)
+    # if check == True:
+    #     print(gserver.list_dir())
+    # else:
+    #     print('gagal membuat koneksi')
+    
+    #check heartbeat
+    print(gserver.check_heartbeat(3,'list dir'))
+   
 
     
 def get_create(filename):
@@ -27,6 +31,13 @@ def get_delete(filename):
 def get_update(filename,content):
     gserver = Pyro4.Proxy(uri)
     print(gserver.update_file(filename,content))
+
+# def check_hearbeat()
+#     gserver = Pyro4.Proxy(uri)
+#     send_string = 'test'
+#     respon = gserver.heartbeat(send_string)
+
+
 
 
 

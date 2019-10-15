@@ -1,9 +1,13 @@
 import os
 import time
- 
+import threading
+
 class FileManage(object):
     def __init__(self):
-        pass
+        self.current_heartbeat = {}
+        self.last_heartbeat = {}
+        self.name_service = ["File Service"]
+        self.save_service("File Service")
     
     def create_file(self,filename=""):
         value = ''
@@ -53,16 +57,13 @@ class FileManage(object):
         else:
             return "file tidak ditemukan"
     
-    def ping_check(self,hostname=""):
-        response = os.system("ping -w" + hostname)
-
-        return response
+    
 
     
     
     def ping_ack(self,hostname):
-        T = 1
-        t_end = time.time() + 5 * T
+        T = 5
+        t_end = time.time() + T
         #t_end = time.time() + 60 * T
         #60 second * 15 minute
         while time.time() < t_end:
@@ -70,8 +71,10 @@ class FileManage(object):
             print(respon)
 
         if respon == "Network Active":
+            print("Berhasil Membuat Koneksi")
             return True
         else:
+            print("Gagal Membuat Koneksi")
             return False
 
     def check_ping(self,hostname):
@@ -84,6 +87,33 @@ class FileManage(object):
             pingstatus = "Network Error"
 
         return pingstatus
+    
+    def check_heartbeat(self,interval,service):
+        sequence = 1
+        limit = 10
+        # for service in self.name_service:
+        self.current_heartbeat[service] = sequence
+        self.last_heartbeat[service] = sequence
+        for iterasi in range(sequence,limit):
+            self.last_heartbeat[service] = sequence
+            self.current_heartbeat[service] = sequence
+            
+
+            time.sleep(interval)
+            print('Sequence number:',self.current_heartbeat[service])
+            respon = self.send_heartbeat(self.current_heartbeat[service])
+            sequence = sequence + 1
+            return respon
+           
+                
+    def send_heartbeat(self,seq_number):
+        return seq_number
+
+    def save_service(self,name_service):
+        self.current_heartbeat[name_service] = 0
+        self.last_heartbeat[name_service] = 0
+
+
 
 
 
