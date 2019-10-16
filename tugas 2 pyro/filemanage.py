@@ -7,7 +7,7 @@ class FileManage(object):
         self.current_heartbeat = {}
         self.last_heartbeat = {}
         self.name_service = ["File Service"]
-        self.save_service("File Service")
+        # self.save_service("File Service")
     
     def create_file(self,filename=""):
         value = ''
@@ -86,6 +86,7 @@ class FileManage(object):
 
         return pingstatus
     
+    #fungsi centralized heartbeat
     def check_heartbeat(self,interval,service,sequence):
         while True:
             # for service in self.name_service:
@@ -101,8 +102,25 @@ class FileManage(object):
                 respon = sequence
             return respon
             time.sleep(interval)
+    
+    #fungsi all heartbeat
+    def all_heartbeat(self,interval,service,sequence):
+        while True:
+            for service in self.name_service:
+                #self.current_heartbeat[service] = sequence
+                self.last_heartbeat[service] = sequence
+                #for iterasi in range(sequence,limit):
+                sequence = self.send_heartbeat(self.last_heartbeat[service])
+                
+                self.current_heartbeat[service] = sequence
+                if(self.last_heartbeat[service] < self.current_heartbeat[service]):
+                    self.last_heartbeat = self.current_heartbeat
+                    print('Sequence number:',self.current_heartbeat[service])
+                    respon = sequence
+                return respon
+            time.sleep(interval)
         
-           
+        
                 
     def send_heartbeat(self,seq_number):
         seq_number = seq_number + 1
