@@ -1,4 +1,4 @@
-from client2.fileserver2 import  *
+from fileserver2 import  *
 import Pyro4
 import sys
 
